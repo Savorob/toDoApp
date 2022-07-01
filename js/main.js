@@ -3,10 +3,12 @@ const taskInput = document.querySelector('#taskInput');
 const taskList = document.querySelector('#tasksList');
 const emptyList = document.querySelector("#emptyList");
 
-//добавить задачу по клику
+
 form.addEventListener('submit', addTask)
-//удалить задачу
+
 taskList.addEventListener('click', deleteTask)
+
+taskList.addEventListener("click", completeTask)
 
 
 
@@ -46,4 +48,11 @@ function deleteTask(event) {
     if (taskList.children.length === 1) {
       emptyList.classList.remove("none");
     }
+}
+function completeTask(event) {
+  if (event.target.dataset.action === 'done') {
+    const parentNode = event.target.closest(".list-group-item");
+    const taskTitle = parentNode.querySelector('.task-title');
+    taskTitle.classList.toggle('task-title--done');
+  }
 }
